@@ -2,7 +2,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.talspektor.notekeeper.NoteActivity">
-    <item android:title="Next" android:orderInCategory="100" android:id="@+id/action_next"
+    <item
+            android:id="@+id/action_get_together"
+            android:icon="@android:drawable/presence_online"
+            android:orderInCategory="100"
+            android:title="Item"
+            app:showAsAction="ifRoom" />
+    <item android:title="Next" android:orderInCategory="101" android:id="@+id/action_next"
           app:showAsAction="ifRoom|withText"
           android:icon="@drawable/ic_forward_white_24dp"/>
     <item android:id="@+id/action_settings"

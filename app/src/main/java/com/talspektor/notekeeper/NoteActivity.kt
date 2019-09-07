@@ -81,13 +81,16 @@ class NoteActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_settings -> true
             R.id.action_next -> {
-
                 if (notePosition < DataManager.notes.lastIndex) {
                     moveNext()
                 } else {
                     val message = "Note more notes"
                     showMessage(message)
                 }
+                true
+            }
+            R.id.action_get_together -> {
+                noteGetTogetherHelper.sendMessage(DataManager.loadNote(notePosition))
                 true
             }
             else -> super.onOptionsItemSelected(item)
