@@ -1,7 +1,9 @@
 package com.talspektor.notekeeper
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -19,21 +21,27 @@ import kotlinx.android.synthetic.main.content_items.*
 
 class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-
     private val noteLayoutManager by lazy {
         LinearLayoutManager(this)
     }
-
     private val noteRecyclerAdapter by lazy {
         NoteRecyclerAdapter(this, DataManager.notes)
     }
-
     private val courseLayoutManager by lazy {
         GridLayoutManager(this, 2)
     }
-
     private val courseRecyclerAdapter by lazy {
         CourseRecyclerAdapter(this, DataManager.courses.values.toList())
+    }
+
+    private val recentlyViewedNoteRecyclerAdapter by lazy {
+        val adapter = NoteRecyclerAdapter(this, viewModel.recentlyViewedNotes)
+//        adapter.setOnSelectedListener(this)
+        adapter
+    }
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this)[ItemsActivityViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,18 +54,29 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         fab.setOnClickListener { view ->
             startActivity(Intent(this, NoteActivity::class.java))
         }
-
-        displayNotes()
+        // Restore activity info
+        if(viewModel.isNewlyCreated && savedInstanceState != null)
+            viewModel.restoreStat(savedInstanceState)
+        viewModel.isNewlyCreated = false
+        handleDisplaySelection(viewModel.navDrawerDisplaySelection)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
+
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+    }
+    // Save activity info
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if(outState != null)
+            viewModel.saveState(outState)
     }
 
     private fun displayNotes() {
@@ -88,6 +107,21 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
+    fun onNoteSelected(note: NoteInfo) {
+        viewModel.addToRecentlyViewedNotes(note)
+    }
+
+    fun handleDisplaySelection(itemId: Int) {
+        when (itemId) {
+            R.id.nav_notes -> {
+                displayNotes()
+            }
+            R.id.nav_courses -> {
+                displayCourses()
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.items, menu)
@@ -107,12 +141,12 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_notes -> {
-                displayNotes()
-            }
+            R.id.nav_notes,
             R.id.nav_courses -> {
-                displayCourses()
+                handleDisplaySelection(item.itemId)
+                viewModel.navDrawerDisplaySelection = item.itemId
             }
+
             R.id.nav_share -> {
                 handleSelection("Don't you think you've enugh")
             }

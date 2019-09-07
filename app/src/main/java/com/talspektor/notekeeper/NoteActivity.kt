@@ -1,5 +1,6 @@
 package com.talspektor.notekeeper
 
+import android.arch.lifecycle.LifecycleObserver
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import kotlinx.android.synthetic.main.content_main.*
 class NoteActivity : AppCompatActivity() {
     private val tag = this::class.simpleName
     private var notePosition = POSITION_NOT_SET
+
+    val noteGetTogetherHelper = NoteGetTogetherHelper(this, lifecycle)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

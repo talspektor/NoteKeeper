@@ -11,6 +11,24 @@ object DataManager {
         initializeNotes()
     }
 
+    fun loadNotes(vararg noteIds: Int): List<NoteInfo> {
+//        simulateLoadDelay()
+        val noteList: List<NoteInfo>
+
+        if(noteIds.isEmpty())
+            noteList = notes
+        else {
+            noteList = ArrayList(noteIds.size)
+            for(noteId in noteIds)
+                noteList.add(notes[noteId])
+        }
+        return noteList
+    }
+
+    fun loadNote(noteId: Int) = notes[noteId]
+
+    fun isLastNoteId(noteId: Int) = noteId == notes.lastIndex
+
     fun addNote(course: CourseInfo, noteTitle: String, noteText: String): Int {
         val note = NoteInfo(course, noteTitle, noteText)
         notes.add(note)
