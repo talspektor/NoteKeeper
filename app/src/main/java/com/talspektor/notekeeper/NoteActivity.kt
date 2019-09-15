@@ -22,7 +22,6 @@ class NoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-
         val adapterCourses = ArrayAdapter<CourseInfo>(this,
             android.R.layout.simple_spinner_dropdown_item,
             DataManager.courses.values.toList())
