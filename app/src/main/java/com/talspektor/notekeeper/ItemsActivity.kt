@@ -28,7 +28,7 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         NoteRecyclerAdapter(this, DataManager.notes)
     }
     private val courseLayoutManager by lazy {
-        GridLayoutManager(this, 2)
+        GridLayoutManager(this, resources.getInteger(R.integer.course_grid_span))
     }
     private val courseRecyclerAdapter by lazy {
         CourseRecyclerAdapter(this, DataManager.courses.values.toList())
@@ -148,10 +148,15 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             }
 
             R.id.nav_share -> {
-                handleSelection("Don't you think you've enugh")
+                handleSelection(R.string.nav_share_message)
             }
             R.id.nav_send -> {
-                handleSelection("Send")
+                handleSelection(R.string.nav_send_message)
+            }
+            R.id.nav_how_many -> {
+                val message = getString(R.string.nav_how_many_message_format,
+                    DataManager.notes.size, DataManager.courses.size)
+                Snackbar.make(listItems, message, Snackbar.LENGTH_LONG).show()
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -159,7 +164,7 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         return true
     }
 
-    private fun handleSelection(message: String) {
-        Snackbar.make(listItems, message, Snackbar.LENGTH_LONG).show()
+    private fun handleSelection(stringId: Int) {
+        Snackbar.make(listItems, stringId, Snackbar.LENGTH_LONG).show()
     }
 }

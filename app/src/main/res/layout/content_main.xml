@@ -23,7 +23,7 @@
             android:id="@+id/textNoteTitle" app:layout_constraintTop_toBottomOf="@+id/spinnerCourses"
             app:layout_constraintEnd_toEndOf="@+id/spinnerCourses"
             app:layout_constraintStart_toStartOf="@+id/spinnerCourses"
-            android:layout_marginTop="16dp" android:hint="Note Title"/>
+            android:layout_marginTop="16dp" android:hint="@string/note_title_hint"/>
     <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,5 +34,5 @@
             app:layout_constraintEnd_toEndOf="@+id/spinnerCourses"
             app:layout_constraintStart_toStartOf="@+id/spinnerCourses"
             app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textNoteTitle" android:hint="Note Text"/>
+            app:layout_constraintTop_toBottomOf="@+id/textNoteTitle" android:hint="@string/note_text_hint"/>
 </android.support.constraint.ConstraintLayout>

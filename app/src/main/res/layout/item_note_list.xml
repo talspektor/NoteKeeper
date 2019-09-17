@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="TextView"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/NoteTitle"
                     app:layout_constraintEnd_toEndOf="@+id/textCourse"
                     app:layout_constraintStart_toStartOf="@+id/textCourse"
                     app:layout_constraintTop_toBottomOf="@+id/textCourse" />
@@ -49,7 +49,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="TextView"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/BrandedText.CourseName"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent" />
