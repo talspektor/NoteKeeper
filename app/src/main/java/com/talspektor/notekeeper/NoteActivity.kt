@@ -1,6 +1,6 @@
 package com.talspektor.notekeeper
 
-import android.arch.lifecycle.LifecycleObserver
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.content_main.*
 class NoteActivity : AppCompatActivity() {
     private val tag = this::class.simpleName
     private var notePosition = POSITION_NOT_SET
+    private var isNewNote = false
+    private var isCancelling = false
+    private var noteColor: Int = Color.TRANSPARENT
 
     val noteGetTogetherHelper = NoteGetTogetherHelper(this, lifecycle)
 
@@ -37,10 +40,16 @@ class NoteActivity : AppCompatActivity() {
         else {
             createNewNote()
         }
+
+        colorSelector.addListener {
+            noteColor = it
+        }
+
         Log.d(tag, "onCreate")
     }
 
     private fun createNewNote() {
+        isNewNote = true
         DataManager.notes.add(NoteInfo())
         notePosition = DataManager.notes.lastIndex
     }
@@ -61,6 +70,8 @@ class NoteActivity : AppCompatActivity() {
         val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
+        colorSelector.selectedColorValue = note.color
+        noteColor = note.color
         // Select the course
         val coursePosition = DataManager.courses.values.indexOf(note.course)
         spinnerCourses.setSelection(coursePosition)
@@ -128,5 +139,6 @@ class NoteActivity : AppCompatActivity() {
         note.title = textNoteTitle.text.toString()
         note.text = textNoteText.text.toString()
         note.course = spinnerCourses.selectedItem as CourseInfo
+        note.color = this.noteColor
     }
 }

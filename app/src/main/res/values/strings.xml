@@ -1,23 +1,37 @@
 <resources>
     <string name="app_name">NoteKeeper</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_items">NoteKeeper</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_items" translatable="false">NoteKeeper</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="menu_gallery" translatable="false">Gallery</string>
+    <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="menu_tools" translatable="false">Tools</string>
+    <string name="menu_share" translatable="false">Share</string>
+    <string name="menu_send" translatable="false">Send</string>
     <string name="note_activity_label">Edit Note</string>
     <string name="note_title_hint">Note Title</string>
     <string name="note_text_hint">Note Text</string>
-    <string name="nav_share_message">Don\'t you think you\'ve enough</string>
-    <string name="nav_send_message">Send</string>
+    <string name="nav_share_message" translatable="false">Don\'t you think you\'ve enough</string>
+    <string name="nav_send_message" translatable="false">Send</string>
     <string name="nav_how_many_message_format">Notes: %1$d | Courses: %2$d</string>
+    <string name="note_color" translatable="false">Note Color</string>
+    <string name="leftarrow" translatable="false">leftArrow</string>
+    <string name="rightarrow" translatable="false">rightArrow</string>
+    <string name="enabled" translatable="false">Enabled</string>
+
+    <string-array name="note_color_array">
+        <item>#E57373</item>
+        <item>#BA68C8</item>
+        <item>#64B5F6</item>
+        <item>#81C784</item>
+        <item>#FFF176</item>
+        <item>#FFB74D</item>
+        <item>#90A4AE</item>
+    </string-array>
 </resources>
